@@ -97,7 +97,8 @@ class RNavNSheet extends StatefulWidget {
     this.sheetCloseIconBoxColor,
     this.sheetOpenIconColor,
     this.sheetCloseIconColor,
-  })  : assert(items.length >= 2 && items.length <= 5, "There must be at least 2 and at most 5 items!"),
+  })  : assert(items.length >= 2 && items.length <= 5,
+            "There must be at least 2 and at most 5 items!"),
         assert(
           (items.length % 2 == 0 && sheet != null) || sheet == null,
           "Please add either 2 or 4 items with sheet!",
@@ -108,7 +109,8 @@ class RNavNSheet extends StatefulWidget {
   State<RNavNSheet> createState() => _RNavNSheetState();
 }
 
-class _RNavNSheetState extends State<RNavNSheet> with SingleTickerProviderStateMixin {
+class _RNavNSheetState extends State<RNavNSheet>
+    with SingleTickerProviderStateMixin {
   int? _selectedIndex;
   late AnimationController _animationController;
   late double _animValue = 0.0;
@@ -149,7 +151,8 @@ class _RNavNSheetState extends State<RNavNSheet> with SingleTickerProviderStateM
   }
 
   _initAnimation() {
-    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
     _animationController.addListener(() {
       setState(() {
         _animValue = _animationController.value;
@@ -205,14 +208,18 @@ class _RNavNSheetState extends State<RNavNSheet> with SingleTickerProviderStateM
     }
 
     var openIcon = widget.sheetOpenIcon ?? Icons.add;
-    var iconBg =
-        _sheetOpen ? widget.sheetOpenIconBoxColor : widget.sheetCloseIconBoxColor ?? widget.sheetOpenIconBoxColor;
-    var iconFg = _sheetOpen ? widget.sheetOpenIconColor : widget.sheetCloseIconColor ?? widget.sheetOpenIconColor;
+    var iconBg = _sheetOpen
+        ? widget.sheetOpenIconBoxColor
+        : widget.sheetCloseIconBoxColor ?? widget.sheetOpenIconBoxColor;
+    var iconFg = _sheetOpen
+        ? widget.sheetOpenIconColor
+        : widget.sheetCloseIconColor ?? widget.sheetOpenIconColor;
     var fab = Expanded(
       child: Padding(
         padding: const EdgeInsets.only(top: 15),
         child: Transform.rotate(
-          angle: _animValue * (pi / 180) * (widget.sheetIconRotateAngle ?? 45.0),
+          angle:
+              _animValue * (pi / 180) * (widget.sheetIconRotateAngle ?? 45.0),
           child: _SheetToggleButton(
             onTap: () => _showBottomSheet(),
             backgroundColor: iconBg,
@@ -233,7 +240,8 @@ class _RNavNSheetState extends State<RNavNSheet> with SingleTickerProviderStateM
     }
 
     var bgColor = widget.backgroundColor ?? theme.canvasColor;
-    var gradientColors = widget.borderColors ?? [bgColor, theme.iconTheme.color!, bgColor];
+    var gradientColors =
+        widget.borderColors ?? [bgColor, theme.iconTheme.color!, bgColor];
     CustomPainter painter = _BottomPainterPlain(gradientColors);
     CustomClipper<Path> clipper = _BottomClipperPlain();
 
@@ -256,6 +264,7 @@ class _RNavNSheetState extends State<RNavNSheet> with SingleTickerProviderStateM
             child: Container(),
           ),
           ClipPath(
+            clipper: clipper,
             child: AnimatedContainer(
               decoration: BoxDecoration(
                 color: bgColor,
@@ -270,7 +279,6 @@ class _RNavNSheetState extends State<RNavNSheet> with SingleTickerProviderStateM
                 ),
               ),
             ),
-            clipper: clipper,
           ),
         ],
       ),

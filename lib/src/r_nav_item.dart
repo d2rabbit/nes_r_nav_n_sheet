@@ -88,7 +88,7 @@ class _RNavItem extends StatelessWidget {
         const SizedBox(height: 5),
         AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 150),
-          style: (theme.textTheme.bodyText2 ?? const TextStyle()).copyWith(
+          style: (theme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
             fontWeight: selected ? FontWeight.bold : FontWeight.normal,
             fontSize: selected ? 11 : 10,
           ),

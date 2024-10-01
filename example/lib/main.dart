@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -28,9 +28,10 @@ class MyApp extends StatelessWidget {
       title: 'RNavNSheet',
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
-        backgroundColor: white,
         scaffoldBackgroundColor: bgColor,
+        cardColor: white,
         canvasColor: bgColor,
+        fontFamily: GoogleFonts.montserrat().fontFamily,
         appBarTheme: AppBarTheme(
           iconTheme: iconTheme,
           backgroundColor: bgColorLight,
@@ -45,12 +46,9 @@ class MyApp extends StatelessWidget {
           onSecondary: white,
           error: error,
           onError: white,
-          background: bgColor,
-          onBackground: white,
-          surface: bgColorLight,
+          surface: white,
           onSurface: white,
         ),
-        fontFamily: GoogleFonts.raleway().fontFamily,
       ),
       themeMode: ThemeMode.dark,
       home: const HomePage(),
@@ -59,7 +57,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -67,7 +65,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _index = 0;
-  bool _open = false;
 
   @override
   void initState() {
@@ -94,7 +91,12 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              [Remix.home_6_fill, Remix.search_2_fill, Remix.shopping_cart_2_fill, Remix.user_3_fill][_index],
+              [
+                Remix.home_6_fill,
+                Remix.search_2_fill,
+                Remix.shopping_cart_2_fill,
+                Remix.user_3_fill
+              ][_index],
               color: theme.colorScheme.secondary,
               size: 48,
             ),
@@ -129,9 +131,7 @@ class _HomePageState extends State<HomePage> {
         sheetCloseIconColor: theme.scaffoldBackgroundColor,
         sheetOpenIconColor: Colors.white,
         onSheetToggle: (v) {
-          setState(() {
-            _open = v;
-          });
+          setState(() {});
         },
         items: const [
           RNavItem(
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Sheet extends StatelessWidget {
-  Sheet({Key? key}) : super(key: key);
+  Sheet({super.key});
 
   final icons = [
     {
@@ -224,7 +224,7 @@ class Sheet extends StatelessWidget {
     return DraggableScrollableSheet(
       builder: (context, controller) {
         return Material(
-          color: theme.backgroundColor,
+          color: theme.colorScheme.surface,
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(20),
           ),
@@ -253,7 +253,8 @@ class Sheet extends StatelessWidget {
                               widthFactor: 0.33,
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: (icon["c"] as Color).withOpacity(0.2),
+                                    color:
+                                        (icon["c"] as Color).withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(10)),
                                 margin: const EdgeInsets.all(5),
                                 padding: const EdgeInsets.all(15),
@@ -266,10 +267,10 @@ class Sheet extends StatelessWidget {
                                     const SizedBox(height: 10),
                                     Text(
                                       "${icon["t"]}",
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      textScaler: const TextScaler.linear(0.9),
+                                      style:
+                                          const TextStyle(color: Colors.black),
                                     ),
                                   ],
                                 ),
@@ -285,7 +286,6 @@ class Sheet extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: theme.colorScheme.primary,
-                            letterSpacing: 5,
                           ),
                         ),
                       ),
@@ -320,6 +320,7 @@ class Sheet extends StatelessWidget {
                           ]
                         ],
                       ),
+                      const SizedBox(height: 72),
                     ],
                   ),
                 ),
