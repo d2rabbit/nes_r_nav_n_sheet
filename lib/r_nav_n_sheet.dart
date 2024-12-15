@@ -3,6 +3,7 @@ library r_nav_n_sheet;
 import 'dart:math' show max, pi;
 
 import 'package:flutter/material.dart';
+import 'package:nes_ui/nes_ui.dart';
 
 part 'src/bottom_clipper.dart';
 
@@ -27,7 +28,7 @@ class RNavNSheet extends StatefulWidget {
   final Widget? sheet;
 
   /// Toggle button icon when sheet is open
-  final IconData? sheetOpenIcon;
+  final IconItem? sheetOpenIcon;
 
   /// Toggle button foreground [Color] when sheet is open
   final Color? sheetOpenIconBoxColor;
@@ -45,7 +46,7 @@ class RNavNSheet extends StatefulWidget {
   final double? sheetIconRotateAngle;
 
   /// Toggle button icon when sheet is closed
-  final IconData? sheetCloseIcon;
+  final IconItem? sheetCloseIcon;
 
   /// [Decoration] for toggle button
   final BoxDecoration? sheetToggleDecoration;
@@ -207,7 +208,7 @@ class _RNavNSheetState extends State<RNavNSheet>
       ));
     }
 
-    var openIcon = widget.sheetOpenIcon ?? Icons.add;
+    var openIcon = widget.sheetOpenIcon ?? IconItem(icon:NesIcons.add);
     var iconBg = _sheetOpen
         ? widget.sheetOpenIconBoxColor
         : widget.sheetCloseIconBoxColor ?? widget.sheetOpenIconBoxColor;

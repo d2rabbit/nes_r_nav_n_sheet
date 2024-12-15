@@ -3,10 +3,10 @@ part of '../r_nav_n_sheet.dart';
 /// [BottomNavigationBarItem] (bottom navigation bar items) for [RNavNSheet]
 class RNavItem {
   /// Icon when item is not selected
-  final IconData icon;
+  final IconItem icon;
 
   /// Icon when item is  selected
-  final IconData? activeIcon;
+  final IconItem activeIcon;
 
   /// Label of the item
   final String label;
@@ -14,13 +14,13 @@ class RNavItem {
   const RNavItem({
     required this.icon,
     required this.label,
-    this.activeIcon,
+    required this.activeIcon,
   });
 }
 
 class _RNavItem extends StatelessWidget {
-  final IconData icon;
-  final IconData? activeIcon;
+  final IconItem icon;
+  final IconItem activeIcon;
   final String label;
   final EdgeInsets? padding;
   final bool selected;
@@ -32,19 +32,19 @@ class _RNavItem extends StatelessWidget {
   final VoidCallback? onTap;
 
   const _RNavItem({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
+    required this.activeIcon,
     this.padding,
     this.selected = false,
     this.onTap,
     this.hide = false,
-    this.activeIcon,
     this.selectedItemColor,
     this.selectedItemGradient,
     this.unselectedItemColor,
     this.unselectedItemGradient,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +79,7 @@ class _RNavItem extends StatelessWidget {
       children: [
         AnimatedSize(
           duration: const Duration(milliseconds: 300),
-          child: Icon(
-            selected && activeIcon != null ? activeIcon : icon,
-            color: color,
-            size: selected ? 24 : 21,
-          ),
+          child: selected ? activeIcon : icon,
         ),
         const SizedBox(height: 5),
         AnimatedDefaultTextStyle(
@@ -123,5 +119,28 @@ class _RNavItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class IconItem extends StatelessWidget {
+  const IconItem({super.key, this.icon});
+
+  final icon;
+
+  static IconItem iconItem(var icon) {
+    return IconItem(icon: icon);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var iconItem;
+    if (icon is NesIconData) {
+      iconItem = NesIcon(iconData: icon);
+    } else if (icon is IconData) {
+      iconItem = Icon(icon);
+    }else {
+      iconItem = icon;
+    }
+    return Center(child: iconItem);
   }
 }

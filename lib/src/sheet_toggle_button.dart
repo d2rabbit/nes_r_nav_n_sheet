@@ -5,7 +5,7 @@ class _SheetToggleButton extends StatelessWidget {
   final BoxDecoration? decoration;
   final Color? backgroundColor;
   final Color? foregroundColor;
-  final IconData icon;
+  final IconItem icon;
   final VoidCallback? onTap;
 
   const _SheetToggleButton(
@@ -33,10 +33,7 @@ class _SheetToggleButton extends StatelessWidget {
                   color: backgroundColor ?? theme.colorScheme.secondary,
                   shape: BoxShape.circle,
                 ),
-            child: Icon(
-              icon,
-              color: foregroundColor,
-            ),
+            child: icon,
           ),
         ),
       ),

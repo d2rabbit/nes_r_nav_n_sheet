@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nes_ui/nes_ui.dart';
 import 'package:r_nav_n_sheet/r_nav_n_sheet.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -25,32 +26,33 @@ class MyApp extends StatelessWidget {
     var error = Colors.red;
 
     return MaterialApp(
+      theme: flutterNesTheme(),
       title: 'RNavNSheet',
       debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData(
-        scaffoldBackgroundColor: bgColor,
-        cardColor: white,
-        canvasColor: bgColor,
-        fontFamily: GoogleFonts.montserrat().fontFamily,
-        appBarTheme: AppBarTheme(
-          iconTheme: iconTheme,
-          backgroundColor: bgColorLight,
-          elevation: 0.0,
-        ),
-        iconTheme: iconTheme,
-        colorScheme: ColorScheme(
-          brightness: Brightness.dark,
-          primary: accent,
-          onPrimary: white,
-          secondary: accent,
-          onSecondary: white,
-          error: error,
-          onError: white,
-          surface: white,
-          onSurface: white,
-        ),
-      ),
-      themeMode: ThemeMode.dark,
+      // darkTheme: ThemeData(
+      //   scaffoldBackgroundColor: bgColor,
+      //   cardColor: white,
+      //   canvasColor: bgColor,
+      //   fontFamily: GoogleFonts.montserrat().fontFamily,
+      //   appBarTheme: AppBarTheme(
+      //     iconTheme: iconTheme,
+      //     backgroundColor: bgColorLight,
+      //     elevation: 0.0,
+      //   ),
+      //   iconTheme: iconTheme,
+      //   colorScheme: ColorScheme(
+      //     brightness: Brightness.dark,
+      //     primary: accent,
+      //     onPrimary: white,
+      //     secondary: accent,
+      //     onSecondary: white,
+      //     error: error,
+      //     onError: white,
+      //     surface: white,
+      //     onSurface: white,
+      //   ),
+      // ),
+      // themeMode: ThemeMode.dark,
       home: const HomePage(),
     );
   }
@@ -125,33 +127,33 @@ class _HomePageState extends State<HomePage> {
         },
         initialSelectedIndex: _index,
         sheet: Sheet(),
-        sheetOpenIcon: Remix.menu_4_line,
-        sheetCloseIcon: Remix.add_line,
+        sheetOpenIcon: IconItem.iconItem(NesIcons.add),
+        sheetCloseIcon: IconItem.iconItem(NesIcons.close),
         sheetCloseIconBoxColor: Colors.white,
         sheetCloseIconColor: theme.scaffoldBackgroundColor,
         sheetOpenIconColor: Colors.white,
         onSheetToggle: (v) {
           setState(() {});
         },
-        items: const [
+        items:  [
           RNavItem(
-            activeIcon: Remix.home_6_fill,
-            icon: Remix.home_6_line,
+            activeIcon: IconItem.iconItem(NesIcons.sun),
+            icon: IconItem.iconItem(NesIcons.sun),
             label: "Home",
           ),
           RNavItem(
-            icon: Remix.search_2_line,
-            activeIcon: Remix.search_2_fill,
+            icon: IconItem.iconItem(NesIcons.sun),
+            activeIcon: IconItem.iconItem(NesIcons.sun),
             label: "Search",
           ),
           RNavItem(
-            icon: Remix.shopping_cart_2_line,
-            activeIcon: Remix.shopping_cart_2_fill,
+            icon:IconItem.iconItem(NesIcons.sun),
+            activeIcon: IconItem.iconItem(NesIcons.sun),
             label: "Cart",
           ),
           RNavItem(
-            icon: Remix.user_3_line,
-            activeIcon: Remix.user_3_fill,
+            icon: IconItem.iconItem(NesIcons.sun),
+            activeIcon: IconItem.iconItem(NesIcons.sun),
             label: "Account",
           ),
         ],
